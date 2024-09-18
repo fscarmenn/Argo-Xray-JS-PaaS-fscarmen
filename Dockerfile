@@ -1,12 +1,20 @@
-FROM ubuntu
+FROM node:bullseye-slim
+
 WORKDIR /app
-USER root
+ENV TZ="Asia/Shanghai" \
+  NODE_ENV="production"
 
-COPY entrypoint.sh ./
+COPY package.json index.js start.sh /app/
+ 
+EXPOSE 3000
 
 
-EXPOSE 80
+RUN chmod 777 package.json index.js start.sh /app &&\
+  apt-get update && \
+  apt-get install -y curl && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+  npm install
 
-RUN apt-get update && apt-get install -y wget curl unzip iproute2 systemctl
 
-ENTRYPOINT [ "/usr/bin/bash", "entrypoint.sh" ]
+CMD ["node", "index.js"]
