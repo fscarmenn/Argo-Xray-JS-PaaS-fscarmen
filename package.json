@@ -1,10 +1,10 @@
 {
   "name": "express-hello-world",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Express Hello World",
   "main": "index.js",
-  "repository": "https://github.com/fscarmen2/Argo-X-JS-PaaS",
-  "author": "fscarmen",
+  "repository": "https://github.com/fscarm",
+  "author": "fscarmn",
   "license": "MIT",
   "private": false,
   "scripts": {
