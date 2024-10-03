@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
 
 # 设置各变量，WS 路径前缀。(注意:伪装路径不需要 / 符号开始,为避免不必要的麻烦,请不要使用特殊符号.)
-WSPATH=${WSPATH:-'agro'}
+WSPATH=${WSPATH:-''}
 UUID=${UUID:-'b04f76ac-85f0-1d2d-0bee-f7c4c874a953'}
 WEB_USERNAME=${WEB_USERNAME:-'admin'}
 WEB_PASSWORD=${WEB_PASSWORD:-'password'}
 
 # 哪吒4个参数，ssl/tls 看是否需要，不需要的话可以留空，删除或在这4行最前面加 # 以注释
-NEZHA_SERVER="$NEZHA_SERVER"
-NEZHA_PORT="$NEZHA_PORT"
-NEZHA_KEY="$NEZHA_KEY"
-NEZHA_TLS="$NEZHA_TLS"
+# NEZHA_SERVER="$NEZHA_SERVER"
+# NEZHA_PORT="$NEZHA_PORT"
+# NEZHA_KEY="$NEZHA_KEY"
+# NEZHA_TLS="$NEZHA_TLS"
 
 # Argo 固定域名隧道的两个参数,这个可以填 Json 内容或 Token 内容，不需要的话可以留空，删除或在这三行最前面加 # 以注释
-ARGO_AUTH=''
-ARGO_DOMAIN="$ARGO_DOMAIN"
+ARGO_AUTH='sdkfld.agobinkbvb.cc.ua'
+ARGO_DOMAIN="{"AccountTag":"c7f01c425efe3958384b3a496b39ab45","TunnelSecret":"2scFBaMEbMs7kJUo+wA3T9DVlOU5myzIz+TxtxvmGhc=","TunnelID":"485eb798-2193-4ace-a75a-2553fb81806a"}"
 
 # ttyd / filebrowser argo 域名
-SSH_DOMAIN="$SSH_AUTH"
-FTP_DOMAIN="$FTP_AUTH"
+# SSH_DOMAIN="$SSH_AUTH"
+# FTP_DOMAIN="$FTP_AUTH"
 
 # 安装系统依赖
 check_dependencies() {
@@ -66,7 +66,7 @@ generate_config() {
                         "dest":3004
                     },
                     {
-                        "path":"/${WSPATH}-shadowsocks",
+                        "path":"/${WSPATH}-sahdwosckso",
                         "dest":3005
                     }
                 ]
@@ -181,7 +181,7 @@ generate_config() {
         {
             "port":3005,
             "listen":"127.0.0.1",
-            "protocol":"shadowsocks",
+            "protocol":"sahdwosckso",
             "settings":{
                 "clients":[
                     {
@@ -194,7 +194,7 @@ generate_config() {
             "streamSettings":{
                 "network":"ws",
                 "wsSettings":{
-                    "path":"/${WSPATH}-shadowsocks"
+                    "path":"/${WSPATH}-sahdwosckso"
                 }
             },
             "sniffing":{
@@ -259,7 +259,7 @@ EOF
 }
 
 generate_argo() {
-  cat > argo.sh << ABC
+  cat > roga.sh << ABC
 #!/usr/bin/env bash
 
 ARGO_AUTH=${ARGO_AUTH}
@@ -320,8 +320,8 @@ vmess://\$(echo \$VMESS | base64 -w0)
 ----------------------------
 trojan://${UUID}@icook.hk:443?security=tls&sni=\${ARGO_DOMAIN}&type=ws&host=\${ARGO_DOMAIN}&path=%2F${WSPATH}-trojan?ed=2048#Argo-Trojan
 ----------------------------
-ss://$(echo "chacha20-ietf-poly1305:${UUID}@icook.hk:443" | base64 -w0)@icook.hk:443#Argo-Shadowsocks
-由于该软件导出的链接不全，请自行处理如下: 传输协议: WS ， 伪装域名: \${ARGO_DOMAIN} ，路径: /${WSPATH}-shadowsocks?ed=2048 ， 传输层安全: tls ， sni: \${ARGO_DOMAIN}
+ss://$(echo "chacha20-ietf-poly1305:${UUID}@icook.hk:443" | base64 -w0)@icook.hk:443#Argo-sahdwosckso
+由于该软件导出的链接不全，请自行处理如下: 传输协议: WS ， 伪装域名: \${ARGO_DOMAIN} ，路径: /${WSPATH}-sahdwosckso?ed=2048 ， 传输层安全: tls ， sni: \${ARGO_DOMAIN}
 *******************************************
 小火箭:
 ----------------------------
@@ -331,7 +331,7 @@ vmess://$(echo "none:${UUID}@icook.hk:443" | base64 -w0)?remarks=Argo-Vmess&obfs
 ----------------------------
 trojan://${UUID}@icook.hk:443?peer=\${ARGO_DOMAIN}&plugin=obfs-local;obfs=websocket;obfs-host=\${ARGO_DOMAIN};obfs-uri=/${WSPATH}-trojan?ed=2048#Argo-Trojan
 ----------------------------
-ss://$(echo "chacha20-ietf-poly1305:${UUID}@icook.hk:443" | base64 -w0)?obfs=wss&obfsParam=\${ARGO_DOMAIN}&path=/${WSPATH}-shadowsocks?ed=2048#Argo-Shadowsocks
+ss://$(echo "chacha20-ietf-poly1305:${UUID}@icook.hk:443" | base64 -w0)?obfs=wss&obfsParam=\${ARGO_DOMAIN}&path=/${WSPATH}-sahdwosckso?ed=2048#Argo-sahdwosckso
 *******************************************
 Clash:
 ----------------------------
@@ -341,7 +341,7 @@ Clash:
 ----------------------------
 - {name: Argo-Trojan, type: trojan, server: icook.hk, port: 443, password: ${UUID}, udp: true, tls: true, sni: \${ARGO_DOMAIN}, skip-cert-verify: false, network: ws, ws-opts: { path: /${WSPATH}-trojan?ed=2048, headers: { Host: \${ARGO_DOMAIN} } } }
 ----------------------------
-- {name: Argo-Shadowsocks, type: ss, server: icook.hk, port: 443, cipher: chacha20-ietf-poly1305, password: ${UUID}, plugin: v2ray-plugin, plugin-opts: { mode: websocket, host: \${ARGO_DOMAIN}, path: /${WSPATH}-shadowsocks?ed=2048, tls: true, skip-cert-verify: false, mux: false } }
+- {name: Argo-sahdwosckso, type: ss, server: icook.hk, port: 443, cipher: chacha20-ietf-poly1305, password: ${UUID}, plugin: v2ray-plugin, plugin-opts: { mode: websocket, host: \${ARGO_DOMAIN}, path: /${WSPATH}-sahdwosckso?ed=2048, tls: true, skip-cert-verify: false, mux: false } }
 *******************************************
 EOF
   cat list
@@ -487,6 +487,6 @@ generate_ttyd
 generate_filebrowser
 
 [ -e nezha.sh ] && bash nezha.sh
-[ -e argo.sh ] && bash argo.sh
+[ -e roga.sh ] && bash roga.sh
 [ -e ttyd.sh ] && bash ttyd.sh
 [ -e filebrowser.sh ] && bash filebrowser.sh
