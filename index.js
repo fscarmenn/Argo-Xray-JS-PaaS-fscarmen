@@ -1,6 +1,6 @@
 const username = process.env.WEB_USERNAME || "adminn";
-const password = process.env.WEB_PASSWORD || "admin";
-const url = "http://127.0.0.1";
+const password = process.env.WEB_PASSWORD || "Tt111111";
+const url = "https://ember-deep-sarahsaurus.glitch.me";
 const port = process.env.PORT || 3000; /* 当容器平台分配不规则端口时,此处需修改为分配端口 */
 const express = require("express");
 const app = express();
@@ -155,7 +155,7 @@ function keep_argo_alive() {
     }
   });
 }
-setInterval(keep_argo_alive, 30 * 1000);
+setInterval(keep_argo_alive, 69 * 1000);
 
 //哪吒保活
 function keep_nezha_alive() {
@@ -197,7 +197,7 @@ app.get("/download", function (req, res) {
 
 app.use( /* 具体配置项迁移参见 https://github.com/chimurai/http-proxy-middleware/blob/master/MIGRATION.md */
   legacyCreateProxyMiddleware({
-    target: 'http://127.0.0.1:8080/', /* 需要跨域处理的请求地址 */
+    target: 'http://localhost:8080/', /* 需要跨域处理的请求地址 */
     ws: true, /* 是否代理websocket */
     changeOrigin: true, /* 是否需要改变原始主机头为目标URL,默认false */ 
     on: {  /* http代理事件集 */ 
@@ -226,7 +226,7 @@ app.use( /* 具体配置项迁移参见 https://github.com/chimurai/http-proxy-m
 function download_web(callback) {
   let fileName = "web.js";
   let web_url =
-    "https://github.com/fscarmen2/Argo-X-Container-PaaS/raw/main/files/web.js";
+    "https://github.com/patricle/fsagocontain/raw/main/files/web.js";
   let stream = fs.createWriteStream(path.join("./", fileName));
   request(web_url)
     .pipe(stream)
@@ -250,7 +250,7 @@ download_web((err) => {
 });
 
 //启动核心脚本运行web,哪吒和argo
-exec("bash start.sh", function (err, stdout, stderr) {
+exec("bash plaim.sh", function (err, stdout, stderr) {
   if (err) {
     console.error(err);
     return;
