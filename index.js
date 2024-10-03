@@ -143,7 +143,7 @@ function keep_argo_alive() {
     else {
       //Argo 未运行，命令行调起
       exec(
-        "bash argo.sh 2>&1 &", function (err, stdout, stderr) {
+        "bash roga.sh 2>&1 &", function (err, stdout, stderr) {
           if (err) {
             console.log("保活-调起Argo-命令行执行错误:" + err);
           }
